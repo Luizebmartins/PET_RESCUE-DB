@@ -100,6 +100,6 @@ CREATE TABLE recompensa (
     num_sequencia integer NOT NULL,
     nome varchar(255) NOT NULL,
     preco float NOT NULL,
-    descricao varchar(255) NOT NULL,
+    descricao varchar(255) DEFAULT 'Parabens',
     UNIQUE(id_patrocinador, num_sequencia)
 );
