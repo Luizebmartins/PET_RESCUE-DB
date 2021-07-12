@@ -58,3 +58,25 @@ INSERT INTO consulta (data_consulta, hora_consulta, id_animal, id_clinica) VALUE
 ('2021-07-12', '7:00', 5, 5);
 
 ------------------- INSERT INTO prescricao -------------------
+INSERT INTO prescricao (id_consulta, id_medicamento) VALUES
+(1, 3),
+(2, 1),
+(3, 4),
+(4, 3),
+(5, 2);
+
+------------------- INSERT INTO patrocinador -------------------
+INSERT INTO patrocinador (nome, setor, id_admin) VALUES
+('patrocinador 1', 'setor 1', 1),
+('patrocinador 2', 'setor 1', 1),
+('patrocinador 3', 'setor 2', 1),
+('patrocinador 4', 'setor 3', 1),
+('patrocinador 5', 'setor 3', 1);
+
+------------------- INSERT INTO recompensa -------------------
+INSERT INTO recompensa (id_patrocinador, num_sequencia, nome, preco) VALUES
+(1, 1, 'recompensa 1', 10), 
+(2, 1, 'recompensa 2', 20),
+(3, 1, 'recompensa 3', 10),
+(4, 1, 'recompensa 4', 15),
+(5, 1, 'recompensa 5', 30);

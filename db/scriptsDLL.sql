@@ -80,7 +80,6 @@ CREATE TABLE consulta (
     UNIQUE(data_consulta, hora_consulta, id_animal, id_clinica)
 );
 
-
 CREATE TABLE prescricao (
     id serial PRIMARY KEY,
     id_consulta integer REFERENCES consulta(id) NOT NULL,
