@@ -65,28 +65,27 @@ CREATE TABLE animal (
     id_adotante integer REFERENCES usuario(id)
 );
 
-CREATE TABLE consulta (
-    data_consulta date NOT NULL,
-    hora_consulta time NOT NULL,
-    id_animal integer REFERENCES animal(id) NOT NULL,
-    id_clinica integer REFERENCES clinica(id) NOT NULL,
-    PRIMARY KEY(data_consulta, hora_consulta, id_animal, id_clinica)
-);
-
 CREATE TABLE medicamento (
     id serial PRIMARY KEY,
     nome varchar(255) NOT NULL,
     valor float NOT NULL
 );
 
-CREATE TABLE prescricao (
+CREATE TABLE consulta (
+    id serial PRIMARY KEY,
     data_consulta date NOT NULL,
     hora_consulta time NOT NULL,
-    id_animal integer NOT NULL,
-    id_clinica integer NOT NULL,
+    id_animal integer REFERENCES animal(id) NOT NULL,
+    id_clinica integer REFERENCES clinica(id) NOT NULL,
+    UNIQUE(data_consulta, hora_consulta, id_animal, id_clinica)
+);
+
+
+CREATE TABLE prescricao (
+    id serial PRIMARY KEY,
+    id_consulta integer REFERENCES consulta(id) NOT NULL,
     id_medicamento integer REFERENCES medicamento(id) NOT NULL,
-    FOREIGN KEY (data_consulta, hora_consulta, id_animal, id_clinica) REFERENCES consulta (data_consulta, hora_consulta, id_animal, id_clinica),
-    PRIMARY KEY (data_consulta, hora_consulta, id_animal, id_clinica, id_medicamento)
+    UNIQUE(id_consulta, id_medicamento)
 );
 
 CREATE TABLE patrocinador (

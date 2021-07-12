@@ -7,7 +7,6 @@ INSERT INTO ong (nome, email, tel, rua, numero, site) VALUES ('ong3', 'ong3@ong'
 INSERT INTO ong (nome, email, tel, rua, numero) VALUES ('ong4', 'ong4@ong', '89736243', 'rua 4', 23);
 INSERT INTO ong (nome, email, tel, rua, numero) VALUES ('ong5', 'ong5@ong', '23234222', 'rua 5', 78);
 
-
 -------------------- INSERT INTO clinica ------------------
 INSERT INTO clinica (nome, rua, numero, hor_inicio, hor_fim) VALUES ('clinica 1', 'Rua 1', 12, '12:00', '18:00');
 INSERT INTO clinica (nome, rua, numero, hor_inicio, hor_fim) VALUES ('clinica 2', 'Rua 2', 13, '12:00', '21:00');
@@ -28,3 +27,34 @@ INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_ong) VALUES ('
 INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_ong) VALUES ('abrigo 3', 20, 'abrigo3@email', '88888883', 'rua 6', 12, 3);
 INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_voluntario) VALUES ('abrigo 4', 2, 'abrigo4@email', '88888884', 'rua 7', 20, 2);
 INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_voluntario) VALUES ('abrigo 5', 1, 'abrigo5@email', '88888885', 'rua 7', 10, 3);
+
+------------------- INSERT INTO foto -------------------
+INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo1.com', 1);
+INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo2.com', 2);
+INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo3.com', 3);
+INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo4.com', 4);
+INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo5.com', 5);
+
+------------------- INSERT INTO animal -------------------
+INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('dalmata', 'pelagem manchada', 'bob', 'true', 'true', 1, 2);
+INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('vira-lata', 'caramelo', 'pitoco', 'true', 'false', 1, 2);
+INSERT INTO animal (raca, cor, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('vira-lata', 'preto', 'true', 'true', 5, 3);
+INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('vira-lata', 'branco', 'corki', 'false', 'false', 4, 3);
+INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('vira-lata', 'caramelo', 'sett', 'true', 'true', 4, 3);
+
+------------------- INSERT INTO medicamento -------------------
+INSERT INTO medicamento (nome, valor) VALUES ('medicamento 1', 10);
+INSERT INTO medicamento (nome, valor) VALUES ('medicamento 2', 10.50);
+INSERT INTO medicamento (nome, valor) VALUES ('medicamento 3', 20);
+INSERT INTO medicamento (nome, valor) VALUES ('medicamento 4', 30.90);
+INSERT INTO medicamento (nome, valor) VALUES ('medicamento 5', 40);
+
+------------------- INSERT INTO consulta -------------------
+INSERT INTO consulta (data_consulta, hora_consulta, id_animal, id_clinica) VALUES
+('2021-07-09', '13:00', 1, 1),
+('2021-07-09', '14:00', 2, 1),
+('2021-07-11', '13:00', 3, 1),
+('2021-07-12', '09:00', 4, 4),
+('2021-07-12', '7:00', 5, 5);
+
+------------------- INSERT INTO prescricao -------------------
