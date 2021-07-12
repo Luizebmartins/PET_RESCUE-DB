@@ -1,8 +1,5 @@
 1 - relação usuario
 atributo email agora é chave candidata
 
-2 - relação ClinicaVet
-nome da relação passa a ser Clinica
 
-3 - [DLL] atributo com valor padrão
-adicionar valor padrao em algum atributo obrigatório
+

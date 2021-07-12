@@ -17,16 +17,10 @@ CREATE TABLE clinica (
     hor_fim time NOT NULL
 );
 
-CREATE TABLE medicamento (
-    id serial PRIMARY KEY,
-    nome varchar(255) NOT NULL,
-    valor float NOT NULL
-);
-
 CREATE TABLE usuario (
     id serial PRIMARY KEY,
     nome varchar(255) NOT NULL,
-    senha varchar(50) NOT NULL,
+    senha varchar(50) CHECK (length(senha) > 4) NOT NULL,
     pontuacao integer,
     email varchar(100) UNIQUE NOT NULL,
     tel varchar(20) NOT NULL,
@@ -34,9 +28,11 @@ CREATE TABLE usuario (
     numero integer,
     id_clinica integer REFERENCES clinica(id),
     id_ong integer REFERENCES ong(id),
-    tipo varchar(20) CHECK (tipo = 'Administrador'
-    or tipo = 'Voluntario' or tipo = 'Funcionario'
-    or tipo = 'Adotante')
+    t_admin boolean DEFAULT 'false',
+    t_volunt boolean DEFAULT 'false',
+    t_func boolean DEFAULT 'false',
+    t_adot boolean DEFAULT 'false'
+
 );
 
 CREATE TABLE abrigo (
@@ -62,8 +58,8 @@ CREATE TABLE animal (
     raca varchar(50),
     cor varchar(50) NOT NULL,
     nome VARCHAR(255),
-    vacinado bit NOT NULL,
-    castrado bit NOT NULL,
+    vacinado boolean NOT NULL,
+    castrado boolean NOT NULL,
     id_abrigo integer REFERENCES abrigo(id) NOT NULL,
     id_user_resg integer REFERENCES usuario(id) NOT NULL,
     id_adotante integer REFERENCES usuario(id)
@@ -75,6 +71,12 @@ CREATE TABLE consulta (
     id_animal integer REFERENCES animal(id) NOT NULL,
     id_clinica integer REFERENCES clinica(id) NOT NULL,
     PRIMARY KEY(data_consulta, hora_consulta, id_animal, id_clinica)
+);
+
+CREATE TABLE medicamento (
+    id serial PRIMARY KEY,
+    nome varchar(255) NOT NULL,
+    valor float NOT NULL
 );
 
 CREATE TABLE prescricao (
@@ -100,6 +102,6 @@ CREATE TABLE recompensa (
     num_sequencia integer NOT NULL,
     nome varchar(255) NOT NULL,
     preco float NOT NULL,
-    descricao varchar(255) DEFAULT 'Parabens',
+    descricao varchar(255) DEFAULT 'Parabens pela recompensa',
     UNIQUE(id_patrocinador, num_sequencia)
 );
