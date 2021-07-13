@@ -29,11 +29,12 @@ INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_voluntario) VA
 INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_voluntario) VALUES ('abrigo 5', 1, 'abrigo5@email', '88888885', 'rua 7', 10, 3);
 
 ------------------- INSERT INTO foto -------------------
-INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo1.com', 1);
-INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo2.com', 2);
-INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo3.com', 3);
-INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo4.com', 4);
-INSERT INTO foto (link, id_abrigo) VALUES ('www.fotoabrigo5.com', 5);
+INSERT INTO foto (link, id_abrigo) VALUES
+('www.fotoabrigo1.com', 1),
+('www.fotoabrigo2.com', 2),
+('www.fotoabrigo3.com', 3),
+('www.fotoabrigo4.com', 4),
+('www.fotoabrigo5.com', 5),
 
 ------------------- INSERT INTO animal -------------------
 INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('dalmata', 'pelagem manchada', 'bob', 'true', 'true', 1, 2);
@@ -43,11 +44,12 @@ INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg
 INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES ('vira-lata', 'caramelo', 'sett', 'true', 'true', 4, 3);
 
 ------------------- INSERT INTO medicamento -------------------
-INSERT INTO medicamento (nome, valor) VALUES ('medicamento 1', 10);
-INSERT INTO medicamento (nome, valor) VALUES ('medicamento 2', 10.50);
-INSERT INTO medicamento (nome, valor) VALUES ('medicamento 3', 20);
-INSERT INTO medicamento (nome, valor) VALUES ('medicamento 4', 30.90);
-INSERT INTO medicamento (nome, valor) VALUES ('medicamento 5', 40);
+INSERT INTO medicamento (nome, valor) VALUES
+('medicamento 1', 10),
+('medicamento 2', 10.50),
+('medicamento 3', 20),
+('medicamento 4', 30.90),
+('medicamento 5', 40);
 
 ------------------- INSERT INTO consulta -------------------
 INSERT INTO consulta (data_consulta, hora_consulta, id_animal, id_clinica) VALUES
@@ -80,3 +82,16 @@ INSERT INTO recompensa (id_patrocinador, num_sequencia, nome, preco) VALUES
 (3, 1, 'recompensa 3', 10),
 (4, 1, 'recompensa 4', 15),
 (5, 1, 'recompensa 5', 30);
+
+
+
+-- Algoritmos de consulta
+-- Junção externa
+SELECT ab.nome, an.nome as nomeanimal, an.raca FROM abrigo ab left join animal  an on ab.id = an.id_abrigo
+
+-- Seleção com like
+
+
+-- Função de agregação com having
+-- Junção interna com mais de duas tabelas
+-- Consulta aninhada

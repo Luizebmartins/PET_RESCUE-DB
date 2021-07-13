@@ -1,0 +1,3 @@
+1 - mudar relação usuario: atributo email agora é chave candidata
+
+2 - mudar cardinalidade entre funcionário, clinica, e ong no documento

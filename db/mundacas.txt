@@ -1,5 +1,0 @@
-1 - relação usuario
-atributo email agora é chave candidata
-
-
-
