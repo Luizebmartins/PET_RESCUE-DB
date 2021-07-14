@@ -18,8 +18,8 @@ INSERT INTO clinica (nome, rua, numero, hor_inicio, hor_fim) VALUES ('clinica 1'
 
 ------------------- INSERT INTO usuario -------------------
 INSERT INTO usuario (nome, senha, email, tel, t_admin) VALUES ('nome 1', 'supersecret', 'user1@email', '99999991', 'true');
-INSERT INTO usuario (nome, senha, email, tel, rua, numero) VALUES ('nome 2', 'supersecret', 'user2@email', '99999992', 'rua 2', 12);
-INSERT INTO usuario (nome, senha, email, tel, rua, numero) VALUES ('nome 3', 'supersecret', 'user3@email', '99999993', 'rua 3', 13);
+INSERT INTO usuario (nome, senha, email, tel, rua, numero, t_volunt) VALUES ('nome 2', 'supersecret', 'user2@email', '99999992', 'rua 2', 12, 'true');
+INSERT INTO usuario (nome, senha, email, tel, rua, numero, t_volunt) VALUES ('nome 3', 'supersecret', 'user3@email', '99999993', 'rua 3', 13, 'true');
 INSERT INTO usuario (nome, senha, email, tel, rua, numero, id_clinica, t_func) VALUES ('nome 4', 'supersecret', 'user4@email', '99999994', 'rua 2', 12, 1, 'true');
 INSERT INTO usuario (nome, senha, email, tel, rua, numero, id_ong, t_func) VALUES ('nome 5', 'supersecret', 'user5@email', '99999995', 'rua 4', 12, 1, 'true');
 
@@ -38,7 +38,7 @@ INSERT INTO foto (link, id_abrigo) VALUES
 ('www.fotoabrigo2.com', 2),
 ('www.fotoabrigo3.com', 3),
 ('www.fotoabrigo4.com', 4),
-('www.fotoabrigo5.com', 5),
+('www.fotoabrigo5.com', 5);
 
 ------------------- INSERT INTO animal -------------------
 INSERT INTO animal (raca, cor, nome, vacinado, castrado, id_abrigo, id_user_resg) VALUES 
@@ -109,7 +109,7 @@ INSERT INTO recompensa (id_patrocinador, num_sequencia, nome, preco) VALUES
 -- Retorna os abrigos com o nome e a raça dos animais que eles
 -- abrigam, como é uma junção externa à esquerda, os abrigos 
 -- que não tem animais também aparecerão
-SELECT ab.id as id_abrigo, ab.nome abrigo, an.id as id_animal, an.nome as animal, an.raca FROM abrigo ab left join animal  an on ab.id = an.id_abrigo
+SELECT ab.id as id_abrigo, ab.nome abrigo, an.id as id_animal, an.nome as nome_animal, an.raca FROM abrigo ab left join animal  an on ab.id = an.id_abrigo
 
 
 -- Seleção com like
@@ -127,7 +127,7 @@ group by nome having max(preco) < 35
 
 -- Junção interna com mais de duas tabelas
 -- Retorna o nome do animal, sua raça, o id do abrigo junto ao seu nome, e o nome do usuario que resgatou esse animal
-SELECT an.nome as animal, an.raca as raca, ab.id as id_abrigo, ab.nome as abrigo, us.nome as resgatante FROM animal an join abrigo ab on an.id_abrigo = ab.id join usuario us on an.id_user_resg = us.id  
+SELECT an.nome as nome_animal, an.raca as raca, ab.id as id_abrigo, ab.nome as abrigo, us.nome as resgatante FROM animal an join abrigo ab on an.id_abrigo = ab.id join usuario us on an.id_user_resg = us.id  
 
 
 -- Consulta aninhada
