@@ -32,7 +32,6 @@ CREATE TABLE usuario (
     t_volunt boolean DEFAULT 'false',
     t_func boolean DEFAULT 'false',
     t_adot boolean DEFAULT 'false'
-
 );
 
 CREATE TABLE abrigo (
@@ -103,3 +102,35 @@ CREATE TABLE recompensa (
     descricao varchar(255) DEFAULT 'Parabens pela recompensa',
     UNIQUE(id_patrocinador, num_sequencia)
 );
+
+
+
+-- ALTER TABLE recompensa add user_resg integer REFERENCES usuario(id)
+
+-- VIEWS
+-- View atualizável e atualizada
+-- Possui todas as consultas do animal de código 1
+-- Pode ser interessante para que seja possível
+-- visualizar apenas as consultas de determinado animal
+CREATE VIEW consultasAnimal AS (SELECT * FROM consulta WHERE id_animal = 1)
+
+-- View Materializada
+-- Possui as recompensas junto ao nome e email dos usuários
+-- que resgaram elas. É uma possível view a ser usada pelo patrocinadores
+CREATE MATERIALIZED VIEW usuarioRecompensa AS (
+SELECT rec.nome as recompensa, us.nome as usuario, us.email contato FROM recompensa rec join usuario us
+on rec.user_resg = us.id)
+
+-- UPDATE recompensa set user_resg =  WHERE id =  
+
+
+-- Procedimento armazenado
+-- Retorna a quatidade de vezes que x recompensa foi resgatada
+CREATE FUNCTION popularidade (nome_rec varchar)
+returns int as $$
+SELECT COUNT(nome) FROM recompensa WHERE recompensa.nome = nome_rec AND recompensa.user_resg IS NOT NULL
+$$ LANGUAGE SQL
+
+SELECT popularidade ('nome recompensa')
+
+

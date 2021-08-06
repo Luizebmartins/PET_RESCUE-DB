@@ -109,7 +109,7 @@ INSERT INTO recompensa (id_patrocinador, num_sequencia, nome, preco) VALUES
 -- Retorna os abrigos com o nome e a raça dos animais que eles
 -- abrigam, como é uma junção externa à esquerda, os abrigos 
 -- que não tem animais também aparecerão
-SELECT ab.id as id_abrigo, ab.nome abrigo, an.id as id_animal, an.nome as nome_animal, an.raca FROM abrigo ab left join animal  an on ab.id = an.id_abrigo
+SELECT ab.id , ab.nome abrigo, an.id as id_animal, an.nome as nome_animal, an.raca FROM abrigo ab left join animal  an on ab.id = an.id_abrigo
 
 
 -- Seleção com like
@@ -133,3 +133,6 @@ SELECT an.nome as nome_animal, an.raca as raca, ab.id as id_abrigo, ab.nome as a
 -- Consulta aninhada
 -- retorna os abrigos que não possuem animais abrigados
 SELECT * from abrigo WHERE id not in (SELECT id_abrigo from animal)
+
+
+
