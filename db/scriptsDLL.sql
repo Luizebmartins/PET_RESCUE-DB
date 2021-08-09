@@ -21,11 +21,11 @@ CREATE TABLE usuario (
     id serial PRIMARY KEY,
     nome varchar(255) NOT NULL,
     senha varchar(50) CHECK (length(senha) > 4) NOT NULL,
-    pontuacao integer,
+    pontuacao integer DEFAULT 0
     email varchar(100) UNIQUE NOT NULL,
     tel varchar(20) NOT NULL,
     rua varchar(100),
-    numero integer,
+    numero integer DEFAULT 0,
     id_clinica integer REFERENCES clinica(id),
     id_ong integer REFERENCES ong(id),
     t_admin boolean DEFAULT 'false',
@@ -101,11 +101,14 @@ CREATE TABLE recompensa (
     preco float NOT NULL,
     descricao varchar(255) DEFAULT 'Parabens pela recompensa',
     UNIQUE(id_patrocinador, num_sequencia)
+    user_resg integer REFERENCES usuario(id)
 );
 
 
 
--- ALTER TABLE recompensa add user_resg integer REFERENCES usuario(id)
+ALTER TABLE recompensa add user_resg integer REFERENCES usuario(id)
+
+
 
 -- VIEWS
 -- View atualizável e atualizada
@@ -121,16 +124,27 @@ CREATE MATERIALIZED VIEW usuarioRecompensa AS (
 SELECT rec.nome as recompensa, us.nome as usuario, us.email contato FROM recompensa rec join usuario us
 on rec.user_resg = us.id)
 
--- UPDATE recompensa set user_resg =  WHERE id =  
-
+-- UPDATE recompensa set user_
 
 -- Procedimento armazenado
 -- Retorna a quatidade de vezes que x recompensa foi resgatada
 CREATE FUNCTION popularidade (nome_rec varchar)
-returns int as $$
-SELECT COUNT(nome) FROM recompensa WHERE recompensa.nome = nome_rec AND recompensa.user_resg IS NOT NULL
+returns integer as $$
+SELECT COUNT(nome) FROM recompensa WHERE recompensa.nome = nome_rec AND recompensa.user_resg is NOT NULL
 $$ LANGUAGE SQL
 
 SELECT popularidade ('nome recompensa')
 
 
+-- Gatilho
+CREATE OR REPLACE FUNCTION alterapontuacao() 
+returns trigger as $$
+BEGIN
+    UPDATE usuario set pontuacao = pontuacao+10
+WHERE id = new.id_user_resg;
+    return NULL;
+END;
+$$ LANGUAGE plpgsql
+
+CREATE trigger tralterapontuacao AFTER INSERT on animal
+for each row execute procedure alterapontuacao();

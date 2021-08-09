@@ -1,3 +1,5 @@
-1 - mudar relação usuario: atributo email agora é chave candidata
-
 2 - mudar cardinalidade entre funcionário, clinica, e ong no documento
+
+3 - por procedimento na regra de negócio
+
+4 -  por gatilho no documento

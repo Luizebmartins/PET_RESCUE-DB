@@ -113,7 +113,7 @@ SELECT ab.id , ab.nome abrigo, an.id as id_animal, an.nome as nome_animal, an.ra
 
 
 -- Seleção com like
--- retonar as ong que possuem o número começando com 89
+-- retona as ong que possuem o número começando com 89
 -- basicamente retorna as ongs que utilizam determinada operadora
 SELECT nome, tel FROM ong WHERE tel like '89%'
 
@@ -135,4 +135,48 @@ SELECT an.nome as nome_animal, an.raca as raca, ab.id as id_abrigo, ab.nome as a
 SELECT * from abrigo WHERE id not in (SELECT id_abrigo from animal)
 
 
+
+
+
+
+
+-- Consultas modelo para algebra relacional
+-- Junção externa
+-- retorna uma tabela com os usuários e as recompensas que eles resgataram
+-- como é uma junção externa à esquerda, os usuário que não resgataram também aparecerão
+SELECT us.nome, us.email, rec.nome as recompensa FROM usuario us left join recompensa rec on us.id = rec.user_resg
+
+-- Seleção com like
+-- retorna os dados de todos os animais que tem sua raça iniciada por "d"
+SELECT * from animal WHERE raca like 'd%'
+
+-- Função de agregação
+-- Retorna as raças existentes dentre os animais no sistema 
+SELECT raca from animal group by raca
+
+-- Função de agregação com having
+-- Retorne a quantidade de consultas por clínica, considerando
+-- somente as clínicas que já realizaram mais de uma consulta
+SELECT id_clinica, count(id) from consulta group by id_clinica having count(id) > 1
+
+-- Junção interna com mais de duas tabelas
+-- retorna o id do animal, seu nome, a data da consulta e a clinica
+-- na qual ocorreu
+SELECT an.id as id_animal, an.nome, cs.data_consulta, cl.nome as clinica FROM animal an join consulta cs on an.id = cs.id_animal join clinica cl on cs.id_clinica = cl.id
+
+-- Operador de conjunto (union ou insertct ou except)
+-- retorna o nome e o endereço de todos os abrigos e clínicas
+SELECT  ab.nome, ab.rua, ab.numero from abrigo ab UNION 
+SELECT cl.nome, cl.rua, cl.numero from clinica cl
+
+-- Junção natural
+-- retorna os dados do abrigo e da consulta de todos os animais
+-- que tiveram uma consulta.
+SELECT * FROM abrigo natural join consulta
+
+-- Consulta aninhada com in ou not in
+-- retorna todos os usuários que já resgataram algum animal
+SELECT * from usuario WHERE id in (SELECT id_user_resg from animal)
+
+-- Divisão
 
