@@ -78,3 +78,10 @@ Id, nome, setor. Um patrocinador é autorizado por um e somente um administrador
 Prioridade: Essencial
 <p align="justify">
 Id, nome, valor. Um medicamento pode estar contido na prescrição de nenhuma ou várias consultas.
+  
+# Modelo Conceitual (Modelo Entidade Relacionamento - DER)
+<div align="center">
+<img src="https://user-images.githubusercontent.com/53983792/130801025-4d846916-1508-47f2-972d-275203da3cc4.png" />
+</div>
+  
+
