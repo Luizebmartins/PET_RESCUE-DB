@@ -20,8 +20,7 @@ INSERT INTO clinica (nome, rua, numero, hor_inicio, hor_fim) VALUES ('clinica 1'
 INSERT INTO usuario (nome, senha, email, tel, t_admin) VALUES ('nome 1', 'supersecret', 'user1@email', '99999991', 'true');
 INSERT INTO usuario (nome, senha, email, tel, rua, numero, t_volunt) VALUES ('nome 2', 'supersecret', 'user2@email', '99999992', 'rua 2', 12, 'true');
 INSERT INTO usuario (nome, senha, email, tel, rua, numero, t_volunt) VALUES ('nome 3', 'supersecret', 'user3@email', '99999993', 'rua 3', 13, 'true');
-INSERT INTO usuario (nome, senha, email, tel, rua, numero, id_clinica, t_func) VALUES ('nome 4', 'supersecret', 'user4@email', '99999994', 'rua 2', 12, 1, 'true');
-INSERT INTO usuario (nome, senha, email, tel, rua, numero, id_ong, t_func) VALUES ('nome 5', 'supersecret', 'user5@email', '99999995', 'rua 4', 12, 1, 'true');
+
 
 ------------------- INSERT INTO abrigo -------------------
 INSERT INTO abrigo (nome, capacidade, email, tel, rua, numero, id_ong) VALUES 
@@ -138,8 +137,6 @@ SELECT * from abrigo WHERE id not in (SELECT id_abrigo from animal)
 
 
 
-
-
 -- Consultas modelo para algebra relacional
 -- Junção externa
 -- retorna uma tabela com os usuários e as recompensas que eles resgataram
@@ -178,5 +175,5 @@ SELECT * FROM abrigo natural join consulta
 -- retorna todos os usuários que já resgataram algum animal
 SELECT * from usuario WHERE id in (SELECT id_user_resg from animal)
 
--- Divisão
+
 

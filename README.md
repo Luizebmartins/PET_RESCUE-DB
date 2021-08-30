@@ -90,21 +90,19 @@ Id, nome, valor. Um medicamento pode estar contido na prescrição de nenhuma ou
   
 
 # Modelo Lógico (Modelo Relacional)
-- Usuario (id_Usuario, Nome*, Senha*, Pontuacao, Email*, Telefone,Rua, Numero, id_Clinica, id_Ong,  t_admin, t_volunt, t_adot)  
-   id_Clinica referencia ClinicaVet (id_Clinica)
-   id_ong referencia ONG (id_ong)
+- Usuario (id_Usuario, Nome*, Senha*, Pontuacao, Email*, Telefone, Rua, Numero, id_Clinica, id_Ong,  t_admin, t_volunt, t_adot)     
    chave candidata: Email
 
 - Animal (Id_Animal, Raca, Cor*, Nome, Vacinado*, Castrado*, id_Abrigo*, id_usr_resg*, id_adotante)  
-  id_abrigo referencia Abrigo (id_Abrigo)
-  id_usr_resg referencia Usuario (id_Usuario)
-  id_adotante referencia Usuario (id_Usuario)
+  id_abrigo referencia Abrigo (id_Abrigo)  
+  id_usr_resg referencia Usuario (id_Usuario)  
+  id_adotante referencia Usuario (id_Usuario)  
 
-- Abrigo (Id_Abrigo, Nome, Capacidade*, Email*, Tel*, Rua*, Numero*, id_Ong, id_voluntario)   
-  id_ong referencia ONG(id_ong)
-  id_voluntario referencia Usuario (id_Usuario)
+- Abrigo (Id_Abrigo, Nome, Capacidade*, Email*, Tel*, Rua*, Numero*, id_Ong, id_voluntario)     
+  id_ong referencia ONG(id_ong)  
+  id_voluntario referencia Usuario (id_Usuario)  
 
-- Foto (link, id_Abrigo*)
+- Foto (link, id_Abrigo*)  
   id_Abrigo referencia Abrigo (id_abrigo)
 
 - ONG (Id_Ong, Nome*, Email*, Tel*, Rua*, Numero*, Site)  

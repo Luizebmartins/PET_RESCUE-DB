@@ -11,6 +11,8 @@ CREATE TABLE ong (
 CREATE TABLE clinica (
     id serial PRIMARY KEY,
     nome varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    tel varchar(20) NOT NULL,
     rua varchar(100) NOT NULL,
     numero integer NOT NULL, 
     hor_inicio time NOT NULL,
@@ -26,11 +28,8 @@ CREATE TABLE usuario (
     tel varchar(20) NOT NULL,
     rua varchar(100),
     numero integer DEFAULT 0,
-    id_clinica integer REFERENCES clinica(id),
-    id_ong integer REFERENCES ong(id),
     t_admin boolean DEFAULT 'false',
     t_volunt boolean DEFAULT 'false',
-    t_func boolean DEFAULT 'false',
     t_adot boolean DEFAULT 'false'
 );
 
@@ -103,12 +102,6 @@ CREATE TABLE recompensa (
     UNIQUE(id_patrocinador, num_sequencia)
     user_resg integer REFERENCES usuario(id)
 );
-
-
-
-ALTER TABLE recompensa add user_resg integer REFERENCES usuario(id)
-
-
 
 -- VIEWS
 -- View atualizável e atualizada
