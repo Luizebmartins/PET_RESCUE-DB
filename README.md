@@ -16,15 +16,19 @@ Outra funcionalidade seria um sistema de recompensas baseado em uma pontuação.
 
 ## Descrição das Classes de Usuário
 <p align="justify">
-*Usuário comum:* Este é o tipo de usuário padrão, contendo as informações essenciais para todos e garantindo o acesso mais básico na aplicação. Ele pode resgatar um animal e levar para algum abrigo(oferecido por um voluntário ou  por uma ONG). Ele recebe pontos para cada animal entregue no abrigo, esses mesmos pontos poderão ser trocados por recompensas.
+
+**Usuário comum:** Este é o tipo de usuário padrão, contendo as informações essenciais para todos e garantindo o acesso mais básico na aplicação. Ele pode resgatar um animal e levar para algum abrigo(oferecido por um voluntário ou  por uma ONG). Ele recebe pontos para cada animal entregue no abrigo, esses mesmos pontos poderão ser trocados por recompensas.
 </p>  
 <p align="justify">
+
 **Adotante:** Este usuário é aquele que tem o intuito de adotar um animal que se encontra em algum abrigo. 
 </p>
 <p align="justify">
+
 **Voluntário:** Este usuário oferece algum local como abrigo temporário para um animal resgatado por alguém, sendo responsável por ele até adotarem o mesmo.
 </p>
 <p align="justify">
+
 **Administrador:** Este usuário possui os mais altos privilégios do sistema e pode modificar quaisquer dados de: usuários, animais, clínicas veterinárias e abrigos. Cabe a ele também registrar no sistema os patrocinadores de recompensas oferecidas para os demais usuários, além de oferecer suporte técnico.  
 </p>
 
@@ -53,13 +57,13 @@ Id, Nome do local, capacidade, endereço(rua, número), contato(telefone, e-mail
 **[RF004] Manter ONGs**
 Prioridade: Essencial
 <p align="justify">
-Id, Nome da ONG, endereço(rua, número), contato(telefone,e-mail), site. Uma ong pode possuir nenhum ou vários funcionários. Uma ong pode oferecer nenhum ou vários abrigos.
+Id, Nome da ONG, endereço(rua, número), contato(telefone, e-mail), site. Uma ong pode oferecer nenhum ou vários abrigos.
 </p>
 
 **[RF005] Manter clínicas veterinárias**
 Prioridade: Essencial
 <p align="justify">
-Id, Nome, endereço, horário de funcionamento(hora início, hora fim). Uma clínica pode possuir nenhum ou mais funcionários. A clínica faz a consulta de 0 ou mais animais.
+Id, Nome, contato(telefone,e-mail), endereço, horário de funcionamento(hora início, hora fim). Uma clínica faz a consulta de 0 ou mais animais.
 </p>
 
 **[RF006] Manter recompensas**
@@ -84,4 +88,46 @@ Id, nome, valor. Um medicamento pode estar contido na prescrição de nenhuma ou
 <img src="https://user-images.githubusercontent.com/53983792/130801025-4d846916-1508-47f2-972d-275203da3cc4.png" />
 </div>
   
+
+# Modelo Lógico (Modelo Relacional)
+- Usuario (id_Usuario, Nome*, Senha*, Pontuacao, Email*, Telefone,Rua, Numero, id_Clinica, id_Ong,  t_admin, t_volunt, t_adot)
+   id_Clinica referencia ClinicaVet (id_Clinica)
+   id_ong referencia ONG (id_ong)
+   chave candidata: Email
+
+- Animal (Id_Animal, Raca, Cor*, Nome, Vacinado*, Castrado*, id_Abrigo*, id_usr_resg*, id_adotante)
+  id_abrigo referencia Abrigo (id_Abrigo)
+  id_usr_resg referencia Usuario (id_Usuario)
+  id_adotante referencia Usuario (id_Usuario)
+
+- Abrigo (Id_Abrigo, Nome, Capacidade*, Email*, Tel*, Rua*, Numero*, id_Ong, id_voluntario)
+  id_ong referencia ONG(id_ong)
+  id_voluntario referencia Usuario (id_Usuario)
+
+- Foto (link, id_Abrigo*)
+  id_Abrigo referencia Abrigo (id_abrigo)
+
+- ONG (Id_Ong, Nome*, Email*, Tel*, Rua*, Numero*, Site)
+
+- Clinica (Id_Clinica, Nome*, Email*, Tel*, Rua*, Numero*, Hor_Inicio*, Hor_Fim*)
+
+- Consulta = Entidade associativa entre Animal e Clínica Médica
+  Consulta (Data, Hora_Consulta, id_Animal, id_Clinica)
+  id_animal referencia Animal (id_ Animal)
+  id_Clinica referencia Clinica (id_Clinica)
+
+- Prescricao = Relacionamento entre consulta e medicamento
+	Prescricao (Data, Hora_Consulta, id_Animal, id_Clinica, id_medicamento,)
+    Data, Hora_consulta, id_Animal, id_Clinica referenciam Consulta (Data, Hora_consulta, id_Animal, id_Clinica)
+    id_medicamento referencia Medicamento (id_Medicamento)
+
+- Medicamento (Id_Medicamento, Nome*, Valor*)
+
+- Patrocinador (Id_Patrocinador, Nome*, Setor*, id_Admin*)
+  id_Admin referencia Usuario (id_Usuario)
+
+- Recompensa (id_Patrocinador, Num_Sequencia, Nome*, Preco*, Descricao*, user_resg)
+  id_Patrocinador referencia Patrocinador (id_Patrocinador)
+  user_resg referencia Usuario (id_Usuario)
+
 
