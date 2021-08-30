@@ -33,7 +33,7 @@ Outra funcionalidade seria um sistema de recompensas baseado em uma pontuação.
 </p>
 
 # Requisitos funcionais
-**[RF001] Manter usuário**
+**[RF001] Manter usuário**  
 Prioridade: Essencial
 <p align="justify">
 Id, nome do usuário, senha, contato(telefone, email), endereço(rua, número) e pontuação. Um mesmo email não pode se repetir para diferentes usuários. O usuário comum realiza a entrega de um animal em um abrigo. Um usuário terá os animais resgatados associados a ele, porém, ao criar a conta não é necessário ter um animal associado a ele. O usuário pode se tornar um desses tipos, podendo ser mais de um ao mesmo tempo:
@@ -42,43 +42,43 @@ Adotante: Responsável por adotar nenhum ou vários animais.
 Voluntário: Responsável por oferecer um ou mais abrigos.
 </p>
 
-**[RF002] Manter animal**
+**[RF002] Manter animal**  
 Prioridade: Essencial
 <p align="justify">
 Id, raça, cor, nome (se tiver/ou for conhecido), informações veterinárias (vacinado? castrado?). Um animal pode ser acolhido em um e somente um abrigo. Um animal pode ser adotado por nenhum ou um adotante. Um animal pode ser resgatado por um e somente um usuário. Um animal pode fazer uma consulta em 0 ou várias clínicas, essa consulta tem data e hora marcada, podendo ser prescrito a partir dela, nenhum ou vários medicamentos. A data e a hora de uma consulta de um animal em uma clínica não pode repetir.
 </p>
 
-**[RF003] Manter abrigos**
+**[RF003] Manter abrigos**  
 Prioridade: Essencial
 <p align="justify">
 Id, Nome do local, capacidade, endereço(rua, número), contato(telefone, e-mail), fotos. Um abrigo acolhe nenhum ou vários animais. Um abrigo é oferecido por um voluntário ou por uma ONG.
 </p>
 
-**[RF004] Manter ONGs**
+**[RF004] Manter ONGs**  
 Prioridade: Essencial
 <p align="justify">
 Id, Nome da ONG, endereço(rua, número), contato(telefone, e-mail), site. Uma ong pode oferecer nenhum ou vários abrigos.
 </p>
 
-**[RF005] Manter clínicas veterinárias**
+**[RF005] Manter clínicas veterinárias**  
 Prioridade: Essencial
 <p align="justify">
 Id, Nome, contato(telefone,e-mail), endereço, horário de funcionamento(hora início, hora fim). Uma clínica faz a consulta de 0 ou mais animais.
 </p>
 
-**[RF006] Manter recompensas**
+**[RF006] Manter recompensas**  
 prioridade: Desejável
 <p align="justify">
 Número de sequência, nome, preço (em pontos) e descrição. Uma recompensa, caso seja retirada, deverá ser por apenas um usuário. O número de sequência só identifica uma recompensa para um patrocinador específico, ou seja, para patrocinadores diferentes podem existir recompensas com o mesmo número de sequência. Deve ser possível requisitar quantas vezes uma determinada recompensa foi resgatada.
 </p>
 
-**[RF007] Manter patrocinador**
+**[RF007] Manter patrocinador**  
 prioridade: Desejável
 <p align="justify">
 Id, nome, setor. Um patrocinador é autorizado por um e somente um administrador. Um patrocinador pode oferecer uma ou mais recompensas.
 </p>
 
-**[RF008] Manter medicamentos**
+**[RF008] Manter medicamentos**  
 Prioridade: Essencial
 <p align="justify">
 Id, nome, valor. Um medicamento pode estar contido na prescrição de nenhuma ou várias consultas.
@@ -90,44 +90,44 @@ Id, nome, valor. Um medicamento pode estar contido na prescrição de nenhuma ou
   
 
 # Modelo Lógico (Modelo Relacional)
-- Usuario (id_Usuario, Nome*, Senha*, Pontuacao, Email*, Telefone,Rua, Numero, id_Clinica, id_Ong,  t_admin, t_volunt, t_adot)
+- Usuario (id_Usuario, Nome*, Senha*, Pontuacao, Email*, Telefone,Rua, Numero, id_Clinica, id_Ong,  t_admin, t_volunt, t_adot)  
    id_Clinica referencia ClinicaVet (id_Clinica)
    id_ong referencia ONG (id_ong)
    chave candidata: Email
 
-- Animal (Id_Animal, Raca, Cor*, Nome, Vacinado*, Castrado*, id_Abrigo*, id_usr_resg*, id_adotante)
+- Animal (Id_Animal, Raca, Cor*, Nome, Vacinado*, Castrado*, id_Abrigo*, id_usr_resg*, id_adotante)  
   id_abrigo referencia Abrigo (id_Abrigo)
   id_usr_resg referencia Usuario (id_Usuario)
   id_adotante referencia Usuario (id_Usuario)
 
-- Abrigo (Id_Abrigo, Nome, Capacidade*, Email*, Tel*, Rua*, Numero*, id_Ong, id_voluntario)
+- Abrigo (Id_Abrigo, Nome, Capacidade*, Email*, Tel*, Rua*, Numero*, id_Ong, id_voluntario)   
   id_ong referencia ONG(id_ong)
   id_voluntario referencia Usuario (id_Usuario)
 
 - Foto (link, id_Abrigo*)
   id_Abrigo referencia Abrigo (id_abrigo)
 
-- ONG (Id_Ong, Nome*, Email*, Tel*, Rua*, Numero*, Site)
+- ONG (Id_Ong, Nome*, Email*, Tel*, Rua*, Numero*, Site)  
 
 - Clinica (Id_Clinica, Nome*, Email*, Tel*, Rua*, Numero*, Hor_Inicio*, Hor_Fim*)
 
 - Consulta = Entidade associativa entre Animal e Clínica Médica
-  Consulta (Data, Hora_Consulta, id_Animal, id_Clinica)
-  id_animal referencia Animal (id_ Animal)
-  id_Clinica referencia Clinica (id_Clinica)
+  Consulta (Data, Hora_Consulta, id_Animal, id_Clinica)  
+  id_animal referencia Animal (id_ Animal)  
+  id_Clinica referencia Clinica (id_Clinica)  
 
 - Prescricao = Relacionamento entre consulta e medicamento
-	Prescricao (Data, Hora_Consulta, id_Animal, id_Clinica, id_medicamento,)
-    Data, Hora_consulta, id_Animal, id_Clinica referenciam Consulta (Data, Hora_consulta, id_Animal, id_Clinica)
-    id_medicamento referencia Medicamento (id_Medicamento)
+	Prescricao (Data, Hora_Consulta, id_Animal, id_Clinica, id_medicamento)  
+    Data, Hora_consulta, id_Animal, id_Clinica referenciam Consulta (Data, Hora_consulta, id_Animal, id_Clinica)  
+    id_medicamento referencia Medicamento (id_Medicamento)  
 
-- Medicamento (Id_Medicamento, Nome*, Valor*)
+- Medicamento (Id_Medicamento, Nome*, Valor*)  
 
-- Patrocinador (Id_Patrocinador, Nome*, Setor*, id_Admin*)
+- Patrocinador (Id_Patrocinador, Nome*, Setor*, id_Admin*)  
   id_Admin referencia Usuario (id_Usuario)
 
-- Recompensa (id_Patrocinador, Num_Sequencia, Nome*, Preco*, Descricao*, user_resg)
-  id_Patrocinador referencia Patrocinador (id_Patrocinador)
+- Recompensa (id_Patrocinador, Num_Sequencia, Nome*, Preco*, Descricao*, user_resg)  
+  id_Patrocinador referencia Patrocinador (id_Patrocinador)  
   user_resg referencia Usuario (id_Usuario)
 
 
